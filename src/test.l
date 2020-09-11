@@ -1,6 +1,6 @@
 %option noyywrap
 
-identifier              {identifier-nondigit}({identifier-nondigit}|{digit})*
+identifier              {identifier-nondigit}({identifier-nondigit}|{digit})*|12?3
 identifier-nondigit     {nondigit}|{universal-character-name}
 nondigit                [a-zA-Z_]
 digit                   [0-9]
