@@ -33,7 +33,12 @@ sign                    +|-
 digit-sequence          {digit}+
 hexadecimal-fractional-constant {hexadecimal-digit-sequence}?.{hexadecimal-digit-sequence}|{hexadecimal-digit-sequence}.
 binary-exponent-part    (p|P){sign}?{digit-sequence}
-
+hexadecimal-digit-sequence  {hexadecimal-digit}+
+floating-suffix         f|l|F|L
+enumeration-constant    {identifier}
+character-constant      [LuU]?'{c-char-sequence}'
+c-char-sequence         {c-char}+
+c-char                  [a-zA-Z]
 
 %%
 
