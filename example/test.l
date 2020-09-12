@@ -44,11 +44,16 @@ simple-escape-sequence  \\['"?\\abfnrtv]
 octal-escape-sequence   \\{octal-digit}{1,3}
 hexadecimal-escape-sequence     \\x{hexadecimal-digit}+
 
+string-literal                  {encoding-prefix}?\"{s-char-sequence}?\"
+encoding-prefix                 u8|u|U|L
+s-char-sequence                 {s-char}+
+s-char                          [^"\\\n]|{escape-sequence}
+
 %%
 
 {digit}                 { printf("digit: %s\n", yytext); }
-{identifier}            { printf("ID: %s\n", yytext); }
 {character-constant}    { printf("Const: %s\n", yytext); }
+{string-literal}        { printf("String: %s\n", yytext); }
 .                       {}
 
 %%

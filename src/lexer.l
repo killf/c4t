@@ -38,11 +38,17 @@ floating-suffix                 f|l|F|L
 enumeration-constant            {identifier}
 character-constant              [LuU]?'{c-char-sequence}'
 c-char-sequence                 {c-char}+
-c-char                          [^'\\]|{simple-escape-sequence}
+c-char                          [^'\\\n]|{simple-escape-sequence}
 escape-sequence                 {simple-escape-sequence}|{octal-escape-sequence}|{hexadecimal-escape-sequence}|{universal-character-name}
 simple-escape-sequence          \\['"?\\abfnrtv]
 octal-escape-sequence           \\{octal-digit}{1,3}
 hexadecimal-escape-sequence     \\x{hexadecimal-digit}+
+
+/*字符串字面量*/
+string-literal                  {encoding-prefix}?\"{s-char-sequence}?\"
+encoding-prefix                 u8|u|U|L
+s-char-sequence                 {s-char}+
+s-char                          [^"\\\n]|{escape-sequence}
 
 %%
 
@@ -96,20 +102,21 @@ hexadecimal-escape-sequence     \\x{hexadecimal-digit}+
 {identifier}                    { return IDENTIFIER; }
 
 /*常数*/
-
+{constant}                      { return CONSTANT; }
 
 /*字符串字面量*/
+{string-literal}                { return STRING_LITERAL; }
 
 /*运算符(第72页)*/
-"["                             { return ; }
-"]"                             { return ; }
-"("                             { return ; }
-")"                             { return ; }
-"{"                             { return ; }
-"}"                             { return ; }
-"."                             { return ; }
-"->"                            { return ; }
-"++"                            { return ; }
+"["                             { return L_BRACKET; }
+"]"                             { return R_BRACKET; }
+"("                             { return L; }
+")"                             { return R; }
+"{"                             { return L; }
+"}"                             { return R; }
+"."                             { return DOT; }
+"->"                            { return POINTER; }
+"++"                            { return PLUS_PLUS; }
 "--"                            { return ; }
 "&"                             { return ; }
 "*"                             { return ; }
