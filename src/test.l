@@ -38,7 +38,7 @@ floating-suffix         f|l|F|L
 enumeration-constant    {identifier}
 character-constant      [LuU]?'{c-char-sequence}'
 c-char-sequence         {c-char}+
-c-char                  [a-zA-Z0-9`~!@#$%^&*()_+\-={}\[\]|:;,.<>/?]|{simple-escape-sequence}
+c-char                  [^\\]|{simple-escape-sequence}
 escape-sequence         {simple-escape-sequence}|{octal-escape-sequence}|{hexadecimal-escape-sequence}|{universal-character-name}
 simple-escape-sequence  \\['"?\\abfnrtv]
 octal-escape-sequence   \\{octal-digit}{1,3}
